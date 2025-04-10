@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Chatbot Getuigenverklaring</title>
+<style>
+  #chat-container {
+    width: 400px;
+    border: 1px solid #ccc;
+    height: 300px;
+    overflow-y: scroll;
+    padding: 10px;
+  }
+  #user-input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    box-sizing: border-box;
+  }
+</style>
+</head>
+<body>
+
+<div id="chat-container">
+  <p>Hallo! Ik ben er klaar voor om mijn getuigenverklaring af te leggen. Stel gerust uw vragen.</p>
+</div>
+<input type="text" id="user-input" placeholder="Stel hier uw vraag...">
+<button onclick="sendMessage()">Verstuur</button>
+
+<script>
+  const chatContainer = document.getElementById('chat-container');
+  const userInput = document.getElementById('user-input');
+
+  function sendMessage() {
+    const userMessage = userInput.value;
+    if (userMessage.trim() !== '') {
+      appendMessage('student', userMessage);
+      userInput.value = '';
+      getBotResponse(userMessage);
+    }
+  }
+
+  function appendMessage(sender, message) {
+    const messageDiv = document.createElement('p');
+    messageDiv.textContent = `${sender === 'student' ? 'Student' : 'Chiel'}: ${message}`;
+    chatContainer.appendChild(messageDiv);
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+  }
+
+  async function getBotResponse(userMessage) {
+    // Vervang dit met de daadwerkelijke integratie met jouw Gemini model
+    // Dit is een eenvoudige simulatie op basis van de trainingsdata
+
+    let botResponse = "";
+
+    if (userMessage.toLowerCase().includes("hoe gaat het")) {
+      botResponse = "Goedemiddag! Met mij gaat het goed, dank u. Bent u klaar om te beginnen met de vragen over de vernieling?";
+    } else if (userMessage.toLowerCase().includes("wat kunt u vertellen over de vernieling")) {
+      botResponse = "Ik zag dat twee personen een bushokje aan het vernielen waren aan de overkant van de Zwarte Hondstraat.";
+    } else if (userMessage.toLowerCase().includes("wanneer was dit")) {
+      botResponse = "Dat was op 1 maart 2025.";
+    } else if (userMessage.toLowerCase().includes("hoe laat was het")) {
+      botResponse = "Het was ongeveer 23:44 uur.";
+    } else if (userMessage.toLowerCase().includes("wat waren uw bezigheden")) {
+      botResponse = "Ik liep naar huis vanaf café De Waterpieper.";
+    } else if (userMessage.toLowerCase().includes("had u wat gedronken")) {
+      botResponse = "Ik had 3 glazen bier op.";
+    } else if (userMessage.toLowerCase().includes("weersgesteldheid")) {
+      botResponse = "Het was donker, maar de straatverlichting was aan.";
+    } else if (userMessage.toLowerCase().includes("goed zicht")) {
+      botResponse = "De afstand tussen mij en de daders was ongeveer 35 meter.";
+    } else if (userMessage.toLowerCase().includes("hoeveel daders")) {
+      botResponse = "Ik zag twee daders.";
+    } else if (userMessage.toLowerCase().includes("beschrijf dader 1") || userMessage.toLowerCase().includes("signalement dader 1")) {
+      botResponse = "Dader 1 droeg een zwarte hoodie.";
+    } else if (userMessage.toLowerCase().includes("hoe lang was dader 1")) {
+      botResponse = "Dader 1 was ongeveer 1.85 meter lang.";
+    } else if (userMessage.toLowerCase().includes("man of vrouw dader 1")) {
+      botResponse = "Het leek een man met een blank uiterlijk.";
+    } else if (userMessage.toLowerCase().includes("gedrag dader 1") || userMessage.toLowerCase().includes("vernieling dader 1")) {
+      botResponse = "Ik zag dat dader 1 met een baksteen de ruiten ingooide.";
+    } else if (userMessage.toLowerCase().includes("baksteen in welke hand")) {
+      botResponse = "Dat heb ik niet specifiek gezien.";
+    } else if (userMessage.toLowerCase().includes("ruiten")) {
+      botResponse = "Ik zag dat dader 1 de ruiten van het bushokje ingooide.";
+    } else if (userMessage.toLowerCase().includes("hoeveel ruiten")) {
+      botResponse = "Ik zag dat hij meerdere ruiten ingooide.";
+    } else if (userMessage.toLowerCase().includes("wat deed dader 2")) {
+      botResponse = "Dader 2 verwijderde de reclameposters.";
+    } else {
+      botResponse = "Wat anders wilt u weten?"; // Valt buiten de getrainde data
+    }
+
+    setTimeout(() => {
+      appendMessage('Chiel', botResponse);
+    }, 500); // Kleine vertraging voor een natuurlijk effect
+  }
+
+  userInput.addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      sendMessage();
+    }
+  });
+</script>
+
+</body>
+</html>
